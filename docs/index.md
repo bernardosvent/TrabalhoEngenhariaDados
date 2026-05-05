@@ -26,44 +26,6 @@ Os arquivos crus (`.csv`) são ingeridos e processados pelo **Apache Spark**, tr
 
 Para estruturar as análises, foi definido um modelo _Star Schema_ contemplando as dimensões de Clubes e Jogadores, e tabelas fato para as Partidas e os Eventos que ocorrem dentro delas.
 
-```mermaid
-erDiagram
-    dim_clube {
-        int id_clube PK
-        string nome
-        string estado
-        string estadio_padrao
-    }
+![Diagrama Entidade-Relacionamento Completo](img/diagrama_completo.png)
 
-    dim_jogador {
-        int id_jogador PK
-        int id_clube FK
-        string nome
-        string posicao
-        date data_nascimento
-    }
-
-    fato_partida {
-        int id_partida PK
-        date data_partida
-        int id_clube_mandante FK
-        int id_clube_visitante FK
-        int placar_mandante
-        int placar_visitante
-        string status_partida
-    }
-
-    fato_evento {
-        int id_evento PK
-        int id_partida FK
-        int id_jogador FK
-        string tipo_evento "Gol, Cartão Amarelo, Cartão Vermelho"
-        int minuto_jogo
-        boolean revisado_var
-    }
-
-    dim_clube ||--o{ dim_jogador : "possui"
-    dim_clube ||--o{ fato_partida : "joga como mandante/visitante"
-    fato_partida ||--o{ fato_evento : "registra"
-    dim_jogador ||--o{ fato_evento : "comete/realiza"
-```
+s

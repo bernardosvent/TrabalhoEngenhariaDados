@@ -8,14 +8,16 @@ Este projeto é referente ao trabalho da disciplina de Engenharia de Dados (Arqu
 
 Este é um projeto acadêmico desenvolvido para fins de avaliação. O ambiente foi configurado e testado em um sistema Linux (Ubuntu/WSL) para garantir a total compatibilidade e estabilidade das ferramentas de Engenharia de Dados, conforme recomendado nas aulas.
 
-## Pré-requisitos
+## 🛠️ Tecnologias e Pré-requisitos
 
-Para reproduzir este projeto e configurar o ambiente de desenvolvimento, é necessário ter as seguintes ferramentas instaladas no sistema:
+Para garantir a reprodutibilidade, utilizamos o gerenciador **UV** para travar as dependências exatas do projeto:
 
-- **Python**: Versão 3.12.1 (recomendado gerenciar via [Pyenv](https://github.com/pyenv/pyenv))
-- **Pipx**: Gerenciador para instalação de pacotes globais isolados
-- **UV**: Gerenciador ultrarrápido de pacotes e ambientes virtuais Python
-- **Git**: Sistema de controle de versão
+- **Java (OpenJDK 11 ou 17)**: Necessário para a execução do motor Spark.
+- **Python**: Versão 3.12.1.
+- **UV**: Gerenciador de pacotes e ambientes virtuais (substituindo Pip/Poetry).
+- **PySpark**: 3.5.1.
+- **Delta Lake**: 3.2.0.
+- **Apache Iceberg**: 1.6.1 (Runtime 3.5_2.12).
 
 ## Instalação
 
@@ -78,5 +80,5 @@ A documentação teórica completa do projeto foi construída utilizando o **MkD
 - Explicação teórica sobre o Apache Iceberg.
 - Explicação teórica sobre o Delta Lake.
 
-**Acesse a documentação web publicada através do GitHub Pages:**
+**Acesse a documentação web:**
 [Link para o MkDocs será inserido aqui]
