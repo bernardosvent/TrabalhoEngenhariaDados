@@ -1,0 +1,10 @@
+site_name: Arquitetura de Dados - Spark, Delta e Iceberg
+site_description: Documentação do trabalho de Apache Spark com Delta Lake e Apache Iceberg.
+theme:
+  name: readthedocs
+
+nav:
+  - Contextualização e Cenário: index.md
+  - Apache Spark (PySpark): pyspark.md
+  - Apache Iceberg: iceberg.md
+  - Delta Lake: delta.md

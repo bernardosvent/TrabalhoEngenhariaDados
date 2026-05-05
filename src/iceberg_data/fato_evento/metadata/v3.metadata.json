@@ -1,0 +1,135 @@
+{
+  "format-version" : 2,
+  "table-uuid" : "93b02bee-5c29-4928-8a3a-9bb759aa7a16",
+  "location" : "iceberg_data/fato_evento",
+  "last-sequence-number" : 2,
+  "last-updated-ms" : 1777949799475,
+  "last-column-id" : 6,
+  "current-schema-id" : 0,
+  "schemas" : [ {
+    "type" : "struct",
+    "schema-id" : 0,
+    "fields" : [ {
+      "id" : 1,
+      "name" : "id_evento",
+      "required" : false,
+      "type" : "int"
+    }, {
+      "id" : 2,
+      "name" : "id_partida",
+      "required" : false,
+      "type" : "int"
+    }, {
+      "id" : 3,
+      "name" : "id_jogador",
+      "required" : false,
+      "type" : "int"
+    }, {
+      "id" : 4,
+      "name" : "tipo_evento",
+      "required" : false,
+      "type" : "string"
+    }, {
+      "id" : 5,
+      "name" : "minuto_jogo",
+      "required" : false,
+      "type" : "int"
+    }, {
+      "id" : 6,
+      "name" : "revisado_var",
+      "required" : false,
+      "type" : "boolean"
+    } ]
+  } ],
+  "default-spec-id" : 0,
+  "partition-specs" : [ {
+    "spec-id" : 0,
+    "fields" : [ ]
+  } ],
+  "last-partition-id" : 999,
+  "default-sort-order-id" : 0,
+  "sort-orders" : [ {
+    "order-id" : 0,
+    "fields" : [ ]
+  } ],
+  "properties" : {
+    "owner" : "arthurlg81",
+    "write.parquet.compression-codec" : "zstd"
+  },
+  "current-snapshot-id" : 1932706607752438167,
+  "refs" : {
+    "main" : {
+      "snapshot-id" : 1932706607752438167,
+      "type" : "branch"
+    }
+  },
+  "snapshots" : [ {
+    "sequence-number" : 1,
+    "snapshot-id" : 1527193095498152604,
+    "timestamp-ms" : 1777949726023,
+    "summary" : {
+      "operation" : "append",
+      "spark.app.id" : "local-1777949697884",
+      "added-data-files" : "3",
+      "added-records" : "3",
+      "added-files-size" : "4816",
+      "changed-partition-count" : "1",
+      "total-records" : "3",
+      "total-files-size" : "4816",
+      "total-data-files" : "3",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0",
+      "engine-version" : "3.5.1",
+      "app-id" : "local-1777949697884",
+      "engine-name" : "spark",
+      "iceberg-version" : "Apache Iceberg 1.6.1 (commit 8e9d59d299be42b0bca9461457cd1e95dbaad086)"
+    },
+    "manifest-list" : "iceberg_data/fato_evento/metadata/snap-1527193095498152604-1-cad57f58-e0c5-4c5e-ac0f-b3e49ba63c39.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 2,
+    "snapshot-id" : 1932706607752438167,
+    "parent-snapshot-id" : 1527193095498152604,
+    "timestamp-ms" : 1777949799475,
+    "summary" : {
+      "operation" : "overwrite",
+      "spark.app.id" : "local-1777949697884",
+      "added-data-files" : "1",
+      "deleted-data-files" : "1",
+      "added-records" : "1",
+      "deleted-records" : "1",
+      "added-files-size" : "1625",
+      "removed-files-size" : "1578",
+      "changed-partition-count" : "1",
+      "total-records" : "3",
+      "total-files-size" : "4863",
+      "total-data-files" : "3",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0",
+      "engine-version" : "3.5.1",
+      "app-id" : "local-1777949697884",
+      "engine-name" : "spark",
+      "iceberg-version" : "Apache Iceberg 1.6.1 (commit 8e9d59d299be42b0bca9461457cd1e95dbaad086)"
+    },
+    "manifest-list" : "iceberg_data/fato_evento/metadata/snap-1932706607752438167-1-495965e0-2d9f-496c-96b6-ceaa536bd19f.avro",
+    "schema-id" : 0
+  } ],
+  "statistics" : [ ],
+  "partition-statistics" : [ ],
+  "snapshot-log" : [ {
+    "timestamp-ms" : 1777949726023,
+    "snapshot-id" : 1527193095498152604
+  }, {
+    "timestamp-ms" : 1777949799475,
+    "snapshot-id" : 1932706607752438167
+  } ],
+  "metadata-log" : [ {
+    "timestamp-ms" : 1777949723208,
+    "metadata-file" : "iceberg_data/fato_evento/metadata/v1.metadata.json"
+  }, {
+    "timestamp-ms" : 1777949726023,
+    "metadata-file" : "iceberg_data/fato_evento/metadata/v2.metadata.json"
+  } ]
+}
