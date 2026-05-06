@@ -81,4 +81,4 @@ A documentação teórica completa do projeto foi construída utilizando o **MkD
 - Explicação teórica sobre o Delta Lake.
 
 **Acesse a documentação web:**
-[Link para o MkDocs será inserido aqui]
+[https://bernardosvent.github.io/TrabalhoEngenhariaDados/iceberg/]
