@@ -82,3 +82,17 @@ A documentação teórica completa do projeto foi construída utilizando o **MkD
 
 **Acesse a documentação web:**
 [https://bernardosvent.github.io/TrabalhoEngenhariaDados/iceberg/]
+
+
+## 📚 Referências
+
+### Fontes Recomendadas
+* **Canal DataWay BR (YouTube)**: Tutoriais práticos sobre Engenharia de Dados, ecossistema Hadoop/Spark e arquiteturas de Lakehouse.
+* **Repositórios de Referência (GitHub - @jlsilva01)**:
+  * [spark-delta](https://github.com/jlsilva01/spark-delta) - Configuração do ecossistema Spark com Delta Lake.
+  * [spark-iceberg](https://github.com/jlsilva01/spark-iceberg) - Configuração do ecossistema Spark com Apache Iceberg.
+
+### Documentação Oficial e Fontes Globais
+* [Delta Lake Official Documentation](https://docs.delta.io/) - Guia oficial de arquitetura, cobrindo transações ACID, Time Travel e Schema Enforcement.
+* [Apache Iceberg Official Documentation](https://iceberg.apache.org/docs/latest/) - Especificações técnicas sobre gerenciamento de metadados, snapshots e evolução de schema.
+* [Apache Spark Documentation](https://spark.apache.org/docs/latest/) - Documentação oficial do motor de processamento distribuído utilizado como base para o projeto.
