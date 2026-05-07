@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Apache Iceberg - Arquitetura de Dados - Spark, Delta e Iceberg</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Apache Iceberg";
+        var mkdocs_page_input_path = "iceberg.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Arquitetura de Dados - Spark, Delta e Iceberg
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Contextualização e Cenário</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../pyspark/">Apache Spark (PySpark)</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Apache Iceberg</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#o-que-e-o-apache-iceberg">O que é o Apache Iceberg?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#principais-funcionalidades">Principais Funcionalidades</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#aplicacao-no-nosso-cenario-futebol-e-var">Aplicação no nosso Cenário (Futebol e VAR)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#implementacao-pratica-e-operacoes-crud">🛠️ Implementação Prática e Operações CRUD</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-definicao-da-tabela-ddl">1. Definição da Tabela (DDL)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-insercao-createinsert">2. Inserção (Create/Insert)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-atualizacao-update-a-correcao-do-var">3. Atualização (Update) - A Correção do VAR</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4-exclusao-delete-gol-anulado">4. Exclusão (Delete) - Gol Anulado</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#5-evidencia-de-execucao-spark-sql">5. Evidência de Execução (Spark SQL)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#6-por-baixo-dos-panos-arquitetura-iceberg">6. Por baixo dos panos (Arquitetura Iceberg)</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../delta/">Delta Lake</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Arquitetura de Dados - Spark, Delta e Iceberg</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Apache Iceberg</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="apache-iceberg">Apache Iceberg</h1>
+<h2 id="o-que-e-o-apache-iceberg">O que é o Apache Iceberg?</h2>
+<p>O <strong>Apache Iceberg</strong> é um formato de tabela aberto e de alto desempenho para conjuntos de dados analíticos enormes. Ele não é um motor de processamento (como o Spark) e nem um sistema de armazenamento físico (como o HDFS ou o AWS S3). Em vez disso, ele é uma <strong>camada de metadados</strong> que fica entre o processamento e o armazenamento.</p>
+<p>Historicamente, os <em>Data Lakes</em> baseados no ecossistema Hadoop (usando o formato Hive) tinham muitas limitações ao lidar com tabelas gigantes. Atualizar uma única linha ou alterar a estrutura (schema) da tabela era um processo demorado e perigoso, podendo corromper os dados. O Iceberg foi criado originalmente pela Netflix justamente para resolver esses problemas, trazendo a confiabilidade dos bancos de dados tradicionais (SQL) para o mundo do Big Data.</p>
+<h2 id="principais-funcionalidades">Principais Funcionalidades</h2>
+<p>O Iceberg introduz conceitos fundamentais para a nossa arquitetura:</p>
+<ul>
+<li><strong>Transações ACID:</strong> Garante que operações de leitura e escrita sejam seguras. Se um trabalho de inserção de dados falhar no meio do caminho, a tabela não ficará corrompida com dados parciais.</li>
+<li><strong>Evolução de Schema (Schema Evolution):</strong> Permite adicionar, renomear ou remover colunas de uma tabela sem a necessidade de reescrever todos os dados antigos.</li>
+<li><strong>Particionamento Oculto (Hidden Partitioning):</strong> O Iceberg gerencia as partições fisicamente debaixo dos panos, evitando que o usuário precise escrever consultas SQL complexas para filtrar dados de forma eficiente.</li>
+<li><strong>Viagem no Tempo (Time Travel):</strong> Como o Iceberg rastreia todas as mudanças através de "snapshots" (fotografias do estado da tabela), é possível consultar como a tabela estava exatamente em um dia ou horário anterior.</li>
+</ul>
+<h2 id="aplicacao-no-nosso-cenario-futebol-e-var">Aplicação no nosso Cenário (Futebol e VAR)</h2>
+<p>No contexto do nosso modelo de estatísticas de partidas de futebol, o Apache Iceberg brilha nas operações críticas.</p>
+<p>Se o Árbitro de Vídeo (VAR) anula um gol após a partida já ter encerrado, nós precisamos executar um comando de <code>DELETE</code> ou <code>UPDATE</code> na tabela <code>fato_evento</code>. Em um <em>Data Lake</em> sem Iceberg, teríamos que reescrever todo o arquivo daquela rodada. Com o Iceberg operando em conjunto com o Apache Spark, podemos rodar um simples comando DML (Data Manipulation Language) e a camada de metadados do Iceberg se encarregará de invalidar o registro do gol antigo de forma atômica e segura, sem interromper as análises de quem estiver lendo a tabela naquele exato momento.</p>
+<h2 id="implementacao-pratica-e-operacoes-crud">🛠️ Implementação Prática e Operações CRUD</h2>
+<p>No nosso arquivo <code>iceberg_football.ipynb</code>, utilizamos as extensões do Apache Iceberg no Spark para executar comandos DML (Data Manipulation Language) utilizando a linguagem SQL padrão.</p>
+<h3 id="1-definicao-da-tabela-ddl">1. Definição da Tabela (DDL)</h3>
+<p>Abaixo, o diagrama da nossa tabela que registra os lances do jogo:</p>
+<p><img alt="Diagrama ER da tabela fato_evento" src="../img/modelo_er.png" /></p>
+<p>A criação da tabela no Iceberg é feita de forma declarativa, definindo claramente o schema e indicando o uso do formato <code>iceberg</code>.</p>
+<pre><code class="language-sql">CREATE TABLE IF NOT EXISTS local.fato_evento (
+    id_evento INT,
+    id_partida INT,
+    id_jogador INT,
+    tipo_evento STRING,
+    minuto_jogo INT,
+    revisado_var BOOLEAN
+) USING iceberg
+</code></pre>
+<h3 id="2-insercao-createinsert">2. Inserção (Create/Insert)</h3>
+<p>A inserção de dados cria um novo arquivo de manifesto, garantindo que a versão inicial da partida (Flamengo x Vasco) seja registrada com segurança.</p>
+<pre><code class="language-sql">INSERT INTO local.fato_evento VALUES
+(1, 101, 10, 'Gol', 15, false),
+(2, 101, 5, 'Cartão Amarelo', 30, false),
+(3, 101, 9, 'Gol', 44, false)
+</code></pre>
+<h3 id="3-atualizacao-update-a-correcao-do-var">3. Atualização (Update) - A Correção do VAR</h3>
+<p>O VAR validou o lance e identificou que o autor do primeiro gol foi, na verdade, o jogador de ID 99. Utilizamos o comando <code>UPDATE</code> tradicional de bancos de dados.</p>
+<pre><code class="language-sql">UPDATE local.fato_evento
+SET id_jogador = 99, revisado_var = true
+WHERE id_evento = 1
+</code></pre>
+<h3 id="4-exclusao-delete-gol-anulado">4. Exclusão (Delete) - Gol Anulado</h3>
+<p>Para remover o segundo gol que foi anulado por impedimento, o comando <code>DELETE</code> é suportado nativamente, sem necessidade de reescrever a tabela inteira.</p>
+<pre><code class="language-sql">DELETE FROM local.fato_evento WHERE id_evento = 3
+</code></pre>
+<h3 id="5-evidencia-de-execucao-spark-sql">5. Evidência de Execução (Spark SQL)</h3>
+<p>Abaixo, a comprovação do nosso código rodando no Jupyter Notebook. Através da linguagem SQL padrão, conseguimos criar a tabela, inserir os dados iniciais e simular a ação do VAR atualizando (UPDATE) o autor do primeiro gol e anulando (DELETE) o segundo gol.</p>
+<p><img alt="Execução dos comandos SQL no Iceberg" src="../img/iceberg_sql.png" /></p>
+<h3 id="6-por-baixo-dos-panos-arquitetura-iceberg">6. Por baixo dos panos (Arquitetura Iceberg)</h3>
+<p>Ao contrário de arquiteturas antigas que dependem de pastas físicas, o Apache Iceberg gerencia tudo através de metadados. A imagem abaixo mostra a pasta <code>metadata</code> criada no nosso projeto. Note a presença dos arquivos <code>.json</code> (v1, v2, v3, v4) e <code>.avro</code>. Cada operação DML que executamos via SQL gerou um novo "snapshot" (foto do estado atual), garantindo que consultas em andamento nunca falhem e permitindo auditoria dos dados.</p>
+<p><img alt="Arquitetura de metadados do Apache Iceberg" src="../img/iceberg_metadata.png" /></p>
+<blockquote>
+<p><strong>Nota Técnica:</strong> Cada uma dessas operações CRUD gerou um novo arquivo JSON na subpasta <code>metadata</code> do Iceberg, formando o histórico de snapshots. Isso demonstra a capacidade do formato de suportar modificações atômicas de nível de linha (row-level updates) utilizando diretamente o Spark SQL.</p>
+</blockquote>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../pyspark/" class="btn btn-neutral float-left" title="Apache Spark (PySpark)"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../delta/" class="btn btn-neutral float-right" title="Delta Lake">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../pyspark/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../delta/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

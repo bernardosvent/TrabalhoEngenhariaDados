@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Apache Spark (PySpark) - Arquitetura de Dados - Spark, Delta e Iceberg</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Apache Spark (PySpark)";
+        var mkdocs_page_input_path = "pyspark.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Arquitetura de Dados - Spark, Delta e Iceberg
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Contextualização e Cenário</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Apache Spark (PySpark)</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#o-que-e-o-apache-spark">O que é o Apache Spark?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#o-que-e-o-pyspark">O que é o PySpark?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#principais-vantagens-do-pyspark-na-engenharia-de-dados">Principais Vantagens do PySpark na Engenharia de Dados:</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#como-o-pyspark-interage-com-delta-e-iceberg">Como o PySpark interage com Delta e Iceberg</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../iceberg/">Apache Iceberg</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../delta/">Delta Lake</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Arquitetura de Dados - Spark, Delta e Iceberg</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Apache Spark (PySpark)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="apache-spark-e-pyspark">Apache Spark e PySpark</h1>
+<h2 id="o-que-e-o-apache-spark">O que é o Apache Spark?</h2>
+<p>O <strong>Apache Spark</strong> é um mecanismo (framework) unificado de processamento de dados distribuído e ultrarrápido, projetado para lidar com grandes volumes de dados (Big Data). Diferente de sistemas mais antigos que liam e gravavam dados no disco a cada pequena etapa do processo, o Spark realiza o processamento primariamente <strong>em memória</strong> (in-memory). Isso o torna excepcionalmente rápido para análises complexas.</p>
+<p>Na arquitetura de dados moderna, ele atua como o "motor" principal, permitindo a ingestão, transformação e análise de dados em grande escala, suportando tanto processamento de dados históricos em lote (Batch) quanto dados contínuos em tempo real (Streaming).</p>
+<h2 id="o-que-e-o-pyspark">O que é o PySpark?</h2>
+<p>O <strong>PySpark</strong> é a interface (API) oficial do Apache Spark para a linguagem Python. Como o Python é a linguagem mais utilizada no cenário de Engenharia de Dados, o PySpark permite que os desenvolvedores escrevam scripts que, nos bastidores, são traduzidos e executados de forma distribuída em um cluster (um conjunto de vários computadores trabalhando juntos).</p>
+<h3 id="principais-vantagens-do-pyspark-na-engenharia-de-dados">Principais Vantagens do PySpark na Engenharia de Dados:</h3>
+<ul>
+<li><strong>Acessibilidade:</strong> Permite usar Python para orquestrar Big Data sem a necessidade de aprender linguagens nativas da máquina virtual Java (JVM), como Scala ou Java.</li>
+<li><strong>Integração:</strong> Facilita a união do processamento distribuído com o rico ecossistema de bibliotecas analíticas do Python.</li>
+<li><strong>Processamento Paralelo (DataFrames):</strong> O PySpark utiliza DataFrames que distribuem automaticamente arquivos gigantes (como arquivos CSV contendo milhões de eventos esportivos) em pequenos pedaços processados simultaneamente.</li>
+</ul>
+<h2 id="como-o-pyspark-interage-com-delta-e-iceberg">Como o PySpark interage com Delta e Iceberg</h2>
+<p>É importante ressaltar que o Spark é estritamente um motor de processamento, e não um banco de dados de armazenamento. Ele lê arquivos crus e precisa gravá-los em algum lugar.</p>
+<p>É exatamente neste ponto de gravação que tecnologias como <strong>Delta Lake</strong> e <strong>Apache Iceberg</strong> entram. O PySpark utiliza os drivers desses formatos para estruturar como os arquivos são salvos no armazenamento em nuvem, garantindo que o motor consiga executar comandos transacionais, como corrigir ou deletar um dado específico, sem corromper o <em>Data Lake</em>.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Contextualização e Cenário"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../iceberg/" class="btn btn-neutral float-right" title="Apache Iceberg">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../iceberg/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
