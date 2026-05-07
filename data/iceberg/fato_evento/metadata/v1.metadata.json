@@ -1,9 +1,9 @@
 {
   "format-version" : 2,
-  "table-uuid" : "211adf17-3303-48c2-8e42-3793d400bda3",
+  "table-uuid" : "c2b79caf-ebb4-43c8-aa61-fb0ff069ce08",
   "location" : "../data/iceberg/fato_evento",
   "last-sequence-number" : 0,
-  "last-updated-ms" : 1777956567995,
+  "last-updated-ms" : 1778122091381,
   "last-column-id" : 6,
   "current-schema-id" : 0,
   "schemas" : [ {

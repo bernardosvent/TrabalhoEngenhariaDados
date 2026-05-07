@@ -1,9 +1,9 @@
 {
   "format-version" : 2,
-  "table-uuid" : "211adf17-3303-48c2-8e42-3793d400bda3",
+  "table-uuid" : "c2b79caf-ebb4-43c8-aa61-fb0ff069ce08",
   "location" : "../data/iceberg/fato_evento",
   "last-sequence-number" : 1,
-  "last-updated-ms" : 1777956569917,
+  "last-updated-ms" : 1778122091756,
   "last-column-id" : 6,
   "current-schema-id" : 0,
   "schemas" : [ {
@@ -56,20 +56,20 @@
     "owner" : "arthurlg81",
     "write.parquet.compression-codec" : "zstd"
   },
-  "current-snapshot-id" : 3198465723461582425,
+  "current-snapshot-id" : 2064296682264265008,
   "refs" : {
     "main" : {
-      "snapshot-id" : 3198465723461582425,
+      "snapshot-id" : 2064296682264265008,
       "type" : "branch"
     }
   },
   "snapshots" : [ {
     "sequence-number" : 1,
-    "snapshot-id" : 3198465723461582425,
-    "timestamp-ms" : 1777956569917,
+    "snapshot-id" : 2064296682264265008,
+    "timestamp-ms" : 1778122091756,
     "summary" : {
       "operation" : "append",
-      "spark.app.id" : "local-1777956565335",
+      "spark.app.id" : "local-1778121738025",
       "added-data-files" : "3",
       "added-records" : "3",
       "added-files-size" : "4816",
@@ -81,21 +81,21 @@
       "total-position-deletes" : "0",
       "total-equality-deletes" : "0",
       "engine-version" : "3.5.1",
-      "app-id" : "local-1777956565335",
+      "app-id" : "local-1778121738025",
       "engine-name" : "spark",
       "iceberg-version" : "Apache Iceberg 1.6.1 (commit 8e9d59d299be42b0bca9461457cd1e95dbaad086)"
     },
-    "manifest-list" : "../data/iceberg/fato_evento/metadata/snap-3198465723461582425-1-86e9835f-849e-4de7-94ba-231a3d38d9ae.avro",
+    "manifest-list" : "../data/iceberg/fato_evento/metadata/snap-2064296682264265008-1-c6f4a6fa-ab92-4f7b-a727-45cda76a0115.avro",
     "schema-id" : 0
   } ],
   "statistics" : [ ],
   "partition-statistics" : [ ],
   "snapshot-log" : [ {
-    "timestamp-ms" : 1777956569917,
-    "snapshot-id" : 3198465723461582425
+    "timestamp-ms" : 1778122091756,
+    "snapshot-id" : 2064296682264265008
   } ],
   "metadata-log" : [ {
-    "timestamp-ms" : 1777956567995,
+    "timestamp-ms" : 1778122091381,
     "metadata-file" : "../data/iceberg/fato_evento/metadata/v1.metadata.json"
   } ]
 }
